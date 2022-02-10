@@ -9,28 +9,28 @@ function fill(value){
     index++;
 }
 
+function remove(){
+    word.pop();
+    index--;
+    let currentRow = document.querySelectorAll(".row")[0];
+    currentRow.children[index].querySelector(".letter").innerHTML = "";
+}
+
 function checkWord(){
     console.log(word);
 }
 
 document.addEventListener("keydown", function(e){
 
-    if(e.key === "Enter"){
+    if(e.key === "Enter" && index === 5){
         checkWord();
-        console.log("mic check")
+        console.log(":)")
     }
 
-    console.log(e.key);
-
     if(e.key === "Backspace"){
-        
         if(index>0){
-            word.pop();
-            index--;
-            let currentRow = document.querySelectorAll(".row")[0];
-            currentRow.children[index].querySelector(".letter").innerHTML = "";
+            remove();
         }
-        
     }
 
     if(index<5 && e.key!="Backspace" && e.key!="Enter"){
