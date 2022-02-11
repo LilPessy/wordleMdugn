@@ -4,6 +4,8 @@
   --btn: #565758;
   --letterBorder: #3a3a3c;
   --key: #818384;
+  --correctLetter: #538d4e;
+  --presentLetter: #b59f3b;
 }
 
 * {
@@ -97,6 +99,14 @@ header {
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+}
+
+.correctLetter{
+  background-color: var(--correctLetter);
+}
+
+.presentLetter{
+  background-color: var(--presentLetter);
 }
 
 .letter::before {
