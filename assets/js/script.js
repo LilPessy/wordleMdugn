@@ -1,7 +1,7 @@
 let index = 0;
 let row = 0;
 let word = [];
-let parolaDelGiorno = "tappo";
+let parolaDelGiorno = "nervi";
 let currentRow = document.querySelectorAll(".row")[row];
 
 function fill(value){
