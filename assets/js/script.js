@@ -8,6 +8,7 @@ function fill(value){
     word[index] = value;
     console.log(word);
     currentRow.children[index].querySelector(".letter").innerHTML = value;
+    currentRow.children[index].querySelector(".letter").classList.add("filledBorder");
     index++;
 }
 
@@ -15,6 +16,7 @@ function remove(){
     word.pop();
     index--;
     currentRow.children[index].querySelector(".letter").innerHTML = "";
+    currentRow.children[index].querySelector(".letter").classList.remove("filledBorder");
 }
 
 function checkWord(){
@@ -25,10 +27,15 @@ function checkWord(){
         submittedWord += word[i];
     }
 
-    submittedWord.toLowerCase();
+    submittedWord=submittedWord.toLowerCase();
+
+    for(let i=0; i<submittedWord.length; i++){
+        currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
+    }
 
     for(let i=0; i<submittedWord.length; i++){
         if(parolaDelGiorno.includes(submittedWord[i], 0)){
+            currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
             currentRow.children[i].querySelector(".letter").classList.add("presentLetter");
         }
     }
@@ -36,6 +43,7 @@ function checkWord(){
     for(let i=0; i<submittedWord.length; i++){
         if(submittedWord[i]===parolaDelGiorno[i]){
             currentRow.children[i].querySelector(".letter").classList.remove("presentLetter");
+            currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
             currentRow.children[i].querySelector(".letter").classList.add("correctLetter");
             correctLetter++;
         }
@@ -56,8 +64,9 @@ function isLetter(str) {
 
 document.addEventListener("keydown", function(e){
 
+    let letter = e.key;
 
-    if(e.key === "Enter" && index === 5){
+    if(letter === "Enter" && index === 5){
         if(checkWord()){
             if(row<5){
                 index = 0;
@@ -67,13 +76,13 @@ document.addEventListener("keydown", function(e){
         }
     }
 
-    if(e.key === "Backspace"){
+    if(letter === "Backspace"){
         if(index>0){
             remove();
         }
     }
 
-    if(index<5 && isLetter(e.key)){
-        fill(e.key);
+    if(index<5 && isLetter(letter)){
+        fill(letter);
     }
 })
