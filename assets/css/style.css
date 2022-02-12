@@ -6,6 +6,8 @@
   --key: #818384;
   --correctLetter: #538d4e;
   --presentLetter: #b59f3b;
+  --absentLetter: #3a3a3c;
+  --filledBorder: #565758;
 }
 
 *{
@@ -88,7 +90,7 @@ header {
 }
 
 .letterContainer {
-  width: 225px;
+  width: 250px;
   height: 270px;
 }
 
@@ -118,6 +120,14 @@ header {
 
 .presentLetter{
   background-color: var(--presentLetter);
+}
+
+.absentLetter{
+  background-color: var(--absentLetter);
+}
+
+.filledBorder{
+  border: 2px solid var(--filledBorder);
 }
 
 .letter::before {
