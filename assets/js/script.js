@@ -3,6 +3,8 @@ let row = 0;
 let word = [];
 let parolaDelGiorno = "nervi";
 let currentRow = document.querySelectorAll(".row")[row];
+let key = document.querySelectorAll(".keyboardChar");
+console.log(key);
 
 function fill(value){
     word[index] = value;
@@ -86,3 +88,30 @@ document.addEventListener("keydown", function(e){
         fill(letter);
     }
 })
+
+for (let i = 0; i < key.length; i++) {
+    key[i].addEventListener("click", function (e) {
+        let letter = e.target.innerHTML;
+        letter=letter.trim();
+
+        if(letter === "ENTER" && index === 5){
+            if(checkWord()){
+                if(row<5){
+                    index = 0;
+                    row++;
+                    currentRow = document.querySelectorAll(".row")[row];
+                }
+            }
+        }
+
+        if(i === 27){
+            if(index>0){
+                remove();
+            }
+        }
+
+        if(index<5 && i!=27 && i!=19){
+            fill(letter);
+        }
+    })
+}
