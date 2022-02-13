@@ -10,11 +10,13 @@
   --filledBorder: #565758;
 }
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   box-sizing: border-box;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
 }
 
 body {
@@ -45,13 +47,19 @@ main {
   }
 }*/
 
-@media(min-width: 768px){
-  main{
+@media (min-width: 768px) {
+  main {
     width: 500px;
   }
 
   .keyboard {
     width: 95%;
+  }
+
+  header {
+    position: sticky;
+    z-index: 10;
+    top: 0;
   }
 }
 
@@ -80,9 +88,6 @@ header {
   justify-content: space-between;
   padding: 0 5px 5px 5px;
   border-bottom: 1px solid var(--btn);
-  position: sticky;
-  z-index: 10;
-  top:0
 }
 
 .statsBtn {
@@ -94,7 +99,7 @@ header {
   height: 270px;
 }
 
-.board{
+.board {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,19 +119,19 @@ header {
   text-transform: uppercase;
 }
 
-.correctLetter{
+.correctLetter {
   background-color: var(--correctLetter);
 }
 
-.presentLetter{
+.presentLetter {
   background-color: var(--presentLetter);
 }
 
-.absentLetter{
+.absentLetter {
   background-color: var(--absentLetter);
 }
 
-.filledBorder{
+.filledBorder {
   border: 2px solid var(--filledBorder);
 }
 
