@@ -1,7 +1,7 @@
 let index = 0;
 let row = 0;
 let word = [];
-let parolaDelGiorno = "nervi";
+let parolaDelGiorno = "tasto";
 let currentRow = document.querySelectorAll(".row")[row];
 let key = document.querySelectorAll(".keyboardChar");
 console.log(key);
@@ -104,10 +104,8 @@ for (let i = 0; i < key.length; i++) {
             }
         }
 
-        if(i === 27){
-            if(index>0){
-                remove();
-            }
+        if(i === 27 && index > 0){
+            remove();
         }
 
         if(index<5 && i!=27 && i!=19){
