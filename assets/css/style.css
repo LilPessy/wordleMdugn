@@ -25,6 +25,7 @@ body {
 }
 
 main {
+  position: relative;
   width: 100%;
   height: calc(100% - 50px);
   display: flex;
@@ -172,4 +173,16 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 15px;
+}
+
+.hidden{
+  display: none;
+}
+
+.modal{
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 50%;
+  background-color: white;
 }

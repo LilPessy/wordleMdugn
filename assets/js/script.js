@@ -1,10 +1,11 @@
 let index = 0;
 let row = 0;
 let word = [];
-let parolaDelGiorno = "tasto";
+let parolaDelGiorno = "minni";
 let currentRow = document.querySelectorAll(".row")[row];
 let key = document.querySelectorAll(".keyboardChar");
 console.log(key);
+let modal = document.querySelector(".modal");
 
 function fill(value){
     word[index] = value;
@@ -25,8 +26,18 @@ function checkWord(){
     let correctLetter = 0;
     let submittedWord = "";
 
+
     for(let i=0; i<word.length; i++){
         submittedWord += word[i];
+    }
+
+    if(submittedWord.length<5){
+        modal.innerHTML="Numero di lettere errato";
+        modal.classList.remove("hidden")
+        setTimeout(()=>{
+            modal.classList.add("hidden")
+        }, 2000)
+        return false;
     }
 
     submittedWord=submittedWord.toLowerCase();
@@ -68,7 +79,7 @@ document.addEventListener("keydown", function(e){
 
     let letter = e.key;
 
-    if(letter === "Enter" && index === 5){
+    if(letter === "Enter"){
         if(checkWord()){
             if(row<5){
                 index = 0;
@@ -94,7 +105,7 @@ for (let i = 0; i < key.length; i++) {
         let letter = e.target.innerHTML;
         letter=letter.trim();
 
-        if(letter === "ENTER" && index === 5){
+        if(letter === "ENTER"){
             if(checkWord()){
                 if(row<5){
                     index = 0;
