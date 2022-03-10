@@ -56,14 +56,14 @@ function checkWord() {
     for (let i = 0; i < submittedWord.length; i++) {
         if (parolaDelGiorno.includes(submittedWord[i], 0)) {
             //TODO: riguardare questo ciclo
+            currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
+            currentRow.children[i].querySelector(".letter").classList.add("presentLetter");
             for(let j=i; j>0; j--){
                 if(submittedWord[j]===submittedWord[i] && j!=i){
                     currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
                     currentRow.children[i].querySelector(".letter").classList.remove("presentLetter");
-                    
-                    currentRow.children[j].querySelector(".letter").classList.remove("absentLetter");
-                    currentRow.children[j].querySelector(".letter").classList.add("presentLetter");
                 }
+                
             }
         }
     }
