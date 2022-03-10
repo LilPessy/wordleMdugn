@@ -55,7 +55,6 @@ function checkWord() {
 
     for (let i = 0; i < submittedWord.length; i++) {
         if (parolaDelGiorno.includes(submittedWord[i], 0)) {
-            //TODO: riguardare questo ciclo
             currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
             currentRow.children[i].querySelector(".letter").classList.add("presentLetter");
             for(let j=i; j>0; j--){
