@@ -1,6 +1,7 @@
 :root {
   --background: #121213;
   --letters: #fff;
+  --boxedLetters: #fff;
   --btn: #565758;
   --letterBorder: #3a3a3c;
   --key: #818384;
@@ -113,7 +114,7 @@ header {
 }
 
 .letter {
-  color: white;
+  color: var(--boxedLetters);
   text-align: center;
   background-color: transparent;
   border: 2px solid var(--letterBorder);
@@ -127,17 +128,17 @@ header {
 
 .correctLetter {
   background-color: var(--correctLetter);
-  color: white;
+  color: white!important;
 }
 
 .presentLetter {
   background-color: var(--presentLetter);
-  color: white;
+  color: white!important;
 }
 
 .absentLetter {
   background-color: var(--absentLetter);
-  color: white;
+  color: white!important;
 }
 
 .filledBorder {
