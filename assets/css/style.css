@@ -81,6 +81,7 @@ main {
 }
 
 .stastSettings {
+  z-index: 10;
   display: flex;
   align-items: center;
 }
@@ -112,7 +113,7 @@ header {
 }
 
 .letter {
-  color: var(--letters);
+  color: white;
   text-align: center;
   background-color: transparent;
   border: 2px solid var(--letterBorder);
@@ -126,14 +127,17 @@ header {
 
 .correctLetter {
   background-color: var(--correctLetter);
+  color: white;
 }
 
 .presentLetter {
   background-color: var(--presentLetter);
+  color: white;
 }
 
 .absentLetter {
   background-color: var(--absentLetter);
+  color: white;
 }
 
 .filledBorder {
@@ -164,8 +168,7 @@ button {
 
 .keyboardChar {
   height: 58px;
-  background-color: var(--key);
-  color: white;
+  color: var(--letters);
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
@@ -173,6 +176,10 @@ button {
   justify-content: center;
   align-items: center;
   font-size: 15px;
+}
+
+.keyBg{
+  background-color: var(--key);
 }
 
 .hidden{
