@@ -203,6 +203,7 @@ for(let i=0; i<themeBtn.length; i++){
            r.style.setProperty("--key", "#d3d6da");
            r.style.setProperty("--letterBorder", "#d3d6da");
            r.style.setProperty("--filledBorder", "#d3d6da");
+           r.style.setProperty("--boxedLetters", "#000")
         }else{
             themeBtn[i].classList.add("hidden");
             themeBtn[i-1].classList.remove("hidden");
@@ -212,6 +213,7 @@ for(let i=0; i<themeBtn.length; i++){
             r.style.setProperty("--key", "#818384");
             r.style.setProperty("--letterBorder", "#3a3a3c");
             r.style.setProperty("--filledBorder", "#565758");
+            r.style.setProperty("--boxedLetters", "#fff")
         }
     })
 }
