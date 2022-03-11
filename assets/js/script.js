@@ -8,6 +8,7 @@ let modal = document.querySelector(".modal");
 let end = false;
 var r = document.querySelector(':root');
 
+
 let themeBtn = document.querySelectorAll(".themeBtn");
 
 function fill(value) {
@@ -52,12 +53,13 @@ function checkWord() {
         currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
         let j = 0;
         let finded = false;
-        while(!finded){
-            console.log(key[j].innerHTML.trim().toLowerCase()==submittedWord[i])
-            if(key[j].innerHTML.trim().toLowerCase()==submittedWord[i]){
-                key[j].classList.add("absentLetter");
-                key[j].classList.remove("keyBg");
-                finded = true;
+        while(!finded && j<key.length){
+            if (key[j].innerHTML.trim().toLowerCase() == submittedWord[i]) {
+                if (!key[j].classList.contains("correctLetter")) {
+                    key[j].classList.add("absentLetter");
+                    key[j].classList.remove("keyBg");
+                    finded = true;
+                }
             }
             j++;
         }
@@ -69,13 +71,14 @@ function checkWord() {
             currentRow.children[i].querySelector(".letter").classList.add("presentLetter");
             let j = 0;
             let finded = false;
-            while(!finded){
-                console.log(key[j].innerHTML.trim().toLowerCase()==submittedWord[i])
-                if(key[j].innerHTML.trim().toLowerCase()==submittedWord[i]){
-                    key[j].classList.add("presentLetter");
-                    key[j].classList.remove("absentLetter");
-                    key[j].classList.remove("keyBg");
-                    finded = true;
+            while(!finded && j<key.length){
+                if (key[j].innerHTML.trim().toLowerCase() == submittedWord[i]) {
+                    if (!key[j].classList.contains("correctLetter")) { 
+                        key[j].classList.add("presentLetter");
+                        key[j].classList.remove("absentLetter");
+                        key[j].classList.remove("keyBg");
+                        finded = true;
+                    }
                 }
                 j++;
             }
@@ -106,8 +109,7 @@ function checkWord() {
             correctLetter++;
             let j = 0;
             let finded = false;
-            while(!finded){
-                console.log(key[j].innerHTML.trim().toLowerCase()==submittedWord[i])
+            while(!finded && j<key.length){
                 if(key[j].innerHTML.trim().toLowerCase()==submittedWord[i]){
                     key[j].classList.add("correctLetter");
                     key[j].classList.remove("presentLetter");
@@ -217,4 +219,5 @@ for(let i=0; i<themeBtn.length; i++){
         }
     })
 }
+
 
