@@ -33,7 +33,9 @@ main {
   margin: 0 auto;
   max-width: 500px;
   align-items: center;
+  justify-content: space-between;
   flex-direction: column;
+  height: 100vh;
 }
 
 /*@media (min-width: 1023px) {
@@ -47,13 +49,9 @@ main {
   .letterContainer {
     max-width: 30%;
   }
-}*/
+}
 
 @media (min-width: 768px) {
-  main {
-    width: 500px;
-  }
-
   .keyboard {
     width: 95%;
   }
@@ -67,7 +65,7 @@ main {
   body {
     overflow: hidden;
   }
-}
+}*/
 
 .title h1 {
   position: absolute;
@@ -93,7 +91,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 5px 5px 5px;
+  padding: 5px 15px;
   border-bottom: 1px solid var(--btn);
 }
 
@@ -102,8 +100,7 @@ header {
 }
 
 .letterContainer {
-  width: 250px;
-  height: 270px;
+  width: 100%;
 }
 
 .board {
@@ -111,6 +108,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  width: 60%;
 }
 
 .letter {
@@ -128,17 +126,17 @@ header {
 
 .correctLetter {
   background-color: var(--correctLetter);
-  color: white!important;
+  color: white !important;
 }
 
 .presentLetter {
   background-color: var(--presentLetter);
-  color: white!important;
+  color: white !important;
 }
 
 .absentLetter {
   background-color: var(--absentLetter);
-  color: white!important;
+  color: white !important;
 }
 
 .filledBorder {
@@ -179,15 +177,15 @@ button {
   font-size: 15px;
 }
 
-.keyBg{
+.keyBg {
   background-color: var(--key);
 }
 
-.hidden{
+.hidden {
   display: none;
 }
 
-.modal{
+.modal {
   position: absolute;
   z-index: 10;
   top: 10%;
