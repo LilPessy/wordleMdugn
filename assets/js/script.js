@@ -7,7 +7,13 @@ let key = document.querySelectorAll(".keyboardChar");
 let modal = document.querySelector(".modal");
 let end = false;
 var r = document.querySelector(':root');
-
+let vocabulary = [];
+    
+fetch("https://raw.githubusercontent.com/pietroppeter/wordle-it/d763ccca39e10ed8c5a3674618d9268ccb60f189/dict/word_list.txt")
+    .then(text => text.text())
+    .then(function (text) {
+        vocabulary = text.split("\n")
+    })
 
 let themeBtn = document.querySelectorAll(".themeBtn");
 
@@ -48,6 +54,18 @@ function checkWord() {
     }
 
     submittedWord = submittedWord.toLowerCase();
+    
+    let finded = false;
+    for (let i = 0; i < vocabulary.length; i++){
+        if (submittedWord === vocabulary[i]) {
+            finded = true;
+        }
+    }
+
+    if (!finded) {
+        modalMsg("Parola non presente");
+        return false;
+    }
 
     for (let i = 0; i < submittedWord.length; i++) {
         currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
@@ -139,7 +157,7 @@ function checkWord() {
 
 
 function isLetter(str) {
-    return str.length === 1 && str.match(/[a-z]/i);
+    return str.length === 1 && str.match(/[a-z]/);
 }
 
 
