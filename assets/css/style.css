@@ -38,35 +38,6 @@ main {
   height: 100vh;
 }
 
-/*@media (min-width: 1023px) {
-  main {
-    width: 50%;
-  }
-
-  .keyboard {
-    width: 95%;
-  }
-  .letterContainer {
-    max-width: 30%;
-  }
-}
-
-@media (min-width: 768px) {
-  .keyboard {
-    width: 95%;
-  }
-
-  header {
-    position: sticky;
-    z-index: 10;
-    top: 0;
-  }
-
-  body {
-    overflow: hidden;
-  }
-}*/
-
 .title h1 {
   position: absolute;
   top: 0;
