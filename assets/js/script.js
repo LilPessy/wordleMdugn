@@ -9,7 +9,7 @@ let end = false;
 var r = document.querySelector(':root');
 let vocabulary = [];
     
-fetch("https://raw.githubusercontent.com/pietroppeter/wordle-it/d763ccca39e10ed8c5a3674618d9268ccb60f189/dict/word_list.txt")
+fetch("https://raw.githubusercontent.com/LilPessy/wordleMdugn/main/assets/vocabulary.txt")
     .then(text => text.text())
     .then(function (text) {
         vocabulary = text.split("\n")
