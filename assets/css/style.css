@@ -22,13 +22,10 @@
 
 body {
   background-color: var(--background);
-  height: 100vh;
 }
 
 main {
-  position: relative;
   width: 100%;
-  height: calc(100% - 50px);
   display: flex;
   margin: 0 auto;
   max-width: 500px;
@@ -38,10 +35,13 @@ main {
   height: 100vh;
 }
 
-.title h1 {
+.title {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.title h1 {
   color: var(--letters);
   font-size: 36px;
   letter-spacing: 0.2rem;
