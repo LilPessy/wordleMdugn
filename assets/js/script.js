@@ -1,19 +1,101 @@
+let gameState = {};
 let index = 0;
 let row = 0;
-let word = [];
-let parolaDelGiorno = "minni";
 let currentRow = document.querySelectorAll(".row")[row];
 let key = document.querySelectorAll(".keyboardChar");
+
+if (localStorage.getItem("state") == null) { 
+    gameState = {
+        boardState: ["mamma", "mamma", "mamma", "", "", ""],
+        wordState: [
+            ["correct", "absent", "absent", "correct", "present", "present"],
+            ["correct", "absent", "absent", "correct", "present", "present"],
+            ["correct", "absent", "absent", "correct", "present", "present"],
+            ["correct", "absent", "absent", "correct", "present", "present"],
+            ["", "", "", "", "", ""],
+            ["", "", "", "", "", ""]
+        ],
+        status: false,
+        rowIndex: 3
+    }
+    let state = JSON.stringify(gameState);
+    localStorage.setItem("state", state);
+    gameState = JSON.parse(localStorage.state)  
+} else {
+    gameState = JSON.parse(localStorage.state);
+    let i = 0;
+    while (i < gameState.boardState.length && gameState.boardState[i] != ""){
+        for (let j = 0; j < gameState.boardState[i].length; j++){
+            currentRow.children[j].querySelector(".letter").innerHTML = gameState.boardState[i][j]
+            currentRow.children[j].querySelector(".letter").classList.add("filledBorder");
+            if (gameState.wordState[i][j] === "absent") {
+                currentRow.children[j].querySelector(".letter").classList.add("absentLetter");
+                let k = 0;
+                let finded = false;
+                while(!finded && k<key.length){
+                    if (key[k].innerHTML.trim().toLowerCase() == gameState.boardState[i][j]) {
+                        key[k].classList.add("absentLetter");
+                        key[k].classList.remove("keyBg");
+                        finded = true;
+                    }
+                    k++;
+                }
+            } else if (gameState.wordState[i][j] === "present") {
+                currentRow.children[j].querySelector(".letter").classList.add("presentLetter");
+                let k = 0;
+                let finded = false;
+                while(!finded && k<key.length){
+                    if (key[k].innerHTML.trim().toLowerCase() == gameState.boardState[i][j]) {
+                        key[k].classList.add("presentLetter");
+                        key[k].classList.remove("absentLetter");
+                        key[k].classList.remove("keyBg");
+                        finded = true;
+                    }
+                    k++;
+                }
+            } else {
+                currentRow.children[j].querySelector(".letter").classList.add("correctLetter");
+                let k = 0;
+                let finded = false;
+                while(!finded && k<key.length){
+                    if (key[k].innerHTML.trim().toLowerCase() == gameState.boardState[i][j]) {
+                        key[k].classList.add("correctLetter");
+                        key[k].classList.remove("absentLetter");
+                        key[k].classList.remove("presentletter");
+                        key[k].classList.remove("keyBg");
+                        finded = true;
+                    }
+                    k++;
+                }
+            }
+        }
+        row++;
+        currentRow = document.querySelectorAll(".row")[row];
+        i++;
+    }
+}
+
+index = 0;
+let word = [];
+let parolaDelGiorno;
 let modal = document.querySelector(".modal");
-let end = false;
+let end = gameState.status;
 var r = document.querySelector(':root');
 let vocabulary = [];
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
     
 fetch("https://raw.githubusercontent.com/LilPessy/wordleMdugn/main/assets/vocabulary.txt")
     .then(text => text.text())
     .then(function (text) {
-        vocabulary = text.split("\n")
-    })
+        vocabulary = text.split("\n");
+        parolaDelGiorno = vocabulary[getRandomInt(1917)];
+        console.log(parolaDelGiorno)
+    })  
 
 let themeBtn = document.querySelectorAll(".themeBtn");
 
@@ -147,7 +229,7 @@ function checkWord() {
     }
 
     if (row == 5 && !end) {
-        modalMsg("Hai perso!");
+        modalMsg(parolaDelGiorno.toUpperCase());
         end = true;
         return false;
     }
