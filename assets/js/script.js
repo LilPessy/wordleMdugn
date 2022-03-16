@@ -84,16 +84,20 @@ var r = document.querySelector(':root');
 let vocabulary = [];
 
 
-function getRandomInt(max) {
-  return Math.floor(Math.random() * max);
+function random(seed) {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
 }
 
+var d = new Date();
+let date = d.getDate()+d.getMonth()+d.getFullYear();
+
     
-fetch("https://raw.githubusercontent.com/LilPessy/wordleMdugn/main/assets/vocabulary.txt")
+fetch("https://lilpessy.github.io/wordleMdugn/assets/vocabulary.txt")
     .then(text => text.text())
     .then(function (text) {
         vocabulary = text.split("\n");
-        parolaDelGiorno = vocabulary[getRandomInt(1917)];
+        parolaDelGiorno = vocabulary[Math.floor(random(date)*vocabulary.length)];
         console.log(parolaDelGiorno)
     })  
 
