@@ -39,6 +39,7 @@ main {
   position: absolute;
   top: 0;
   left: 0;
+  padding-top: 5px;
 }
 
 .title h1 {
@@ -79,7 +80,7 @@ header {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  width: 60%;
+  width: 55%;
 }
 
 .letter {
