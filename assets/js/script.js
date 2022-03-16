@@ -6,17 +6,17 @@ let key = document.querySelectorAll(".keyboardChar");
 
 if (localStorage.getItem("state") == null) { 
     gameState = {
-        boardState: ["mamma", "mamma", "mamma", "", "", ""],
+        boardState: ["", "", "", "", "", ""],
         wordState: [
-            ["correct", "absent", "absent", "correct", "present", "present"],
-            ["correct", "absent", "absent", "correct", "present", "present"],
-            ["correct", "absent", "absent", "correct", "present", "present"],
-            ["correct", "absent", "absent", "correct", "present", "present"],
-            ["", "", "", "", "", ""],
-            ["", "", "", "", "", ""]
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""]
         ],
         status: false,
-        rowIndex: 3
+        rowIndex: 0
     }
     let state = JSON.stringify(gameState);
     localStorage.setItem("state", state);
@@ -70,12 +70,15 @@ if (localStorage.getItem("state") == null) {
             }
         }
         row++;
+
         currentRow = document.querySelectorAll(".row")[row];
         i++;
     }
 }
 
 index = 0;
+row = gameState.rowIndex;
+currentRow = document.querySelectorAll(".row")[row];
 let word = [];
 let parolaDelGiorno;
 let modal = document.querySelector(".modal");
@@ -155,6 +158,8 @@ function checkWord() {
 
     for (let i = 0; i < submittedWord.length; i++) {
         currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
+        gameState.wordState[row][i] = "absent";
+        localStorage.setItem("state", JSON.stringify(gameState))
         let j = 0;
         let finded = false;
         while(!finded && j<key.length){
@@ -173,6 +178,8 @@ function checkWord() {
         if (parolaDelGiorno.includes(submittedWord[i], 0)) {
             currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
             currentRow.children[i].querySelector(".letter").classList.add("presentLetter");
+            gameState.wordState[row][i] = "present";
+            localStorage.setItem("state", JSON.stringify(gameState))
             let j = 0;
             let finded = false;
             while(!finded && j<key.length){
@@ -191,6 +198,8 @@ function checkWord() {
                 if(submittedWord[j]===submittedWord[i] && j!=i){
                     currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
                     currentRow.children[i].querySelector(".letter").classList.remove("presentLetter");
+                    gameState.wordState[row][i] = "absent";
+                    localStorage.setItem("state", JSON.stringify(gameState))
                 }
                 
             }
@@ -204,12 +213,14 @@ function checkWord() {
                     if(submittedWord[j] === submittedWord[i] && submittedWord[j]!=parolaDelGiorno[j]){
                         currentRow.children[j].querySelector(".letter").classList.add("absentLetter");
                         currentRow.children[j].querySelector(".letter").classList.remove("presentLetter");
+                        gameState.wordState[row][i] = "absent";
                     }
                 }
             }
             currentRow.children[i].querySelector(".letter").classList.remove("presentLetter");
             currentRow.children[i].querySelector(".letter").classList.remove("absentLetter");
             currentRow.children[i].querySelector(".letter").classList.add("correctLetter");
+            gameState.wordState[row][i] = "correct";
             correctLetter++;
             let j = 0;
             let finded = false;
@@ -227,17 +238,25 @@ function checkWord() {
     }
 
     if (correctLetter === 5) {
+        gameState.boardState[row] = submittedWord
         modalMsg("Hai vinto!");
         end = true;
+        gameState.status = end;
+        localStorage.setItem("state", JSON.stringify(gameState))
         return false;
     }
 
     if (row == 5 && !end) {
+        gameState.boardState[row] = submittedWord;
         modalMsg(parolaDelGiorno.toUpperCase());
         end = true;
+        gameState.status = end;
+        localStorage.setItem("state", JSON.stringify(gameState))
         return false;
     }
 
+    gameState.boardState[row] = submittedWord
+    localStorage.setItem("state", JSON.stringify(gameState));
     return true;
 }
 
@@ -257,6 +276,8 @@ document.addEventListener("keydown", function (e) {
                 word.splice(0, word.length);
                 index = 0;
                 row++;
+                gameState.rowIndex = row;
+                localStorage.setItem("state", JSON.stringify(gameState))
                 currentRow = document.querySelectorAll(".row")[row];
             }
         }
