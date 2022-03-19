@@ -4,6 +4,10 @@ let row = 0;
 let currentRow = document.querySelectorAll(".row")[row];
 let key = document.querySelectorAll(".keyboardChar");
 
+if (localStorage.getItem("state") != null) { 
+    gameState = JSON.parse(localStorage.state);  
+}
+
 if (localStorage.getItem("state") == null) { 
     gameState = {
         boardState: ["", "", "", "", "", ""],
@@ -16,12 +20,31 @@ if (localStorage.getItem("state") == null) {
             ["", "", "", "", ""]
         ],
         status: false,
-        rowIndex: 0
+        rowIndex: 0,
+        date: new Date().toDateString()
     }
     let state = JSON.stringify(gameState);
     localStorage.setItem("state", state);
     gameState = JSON.parse(localStorage.state)  
-} else {
+} else if(gameState.date != new Date().toDateString()){
+    gameState = {
+        boardState: ["", "", "", "", "", ""],
+        wordState: [
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""],
+            ["", "", "", "", ""]
+        ],
+        status: false,
+        rowIndex: 0,
+        date: new Date().toDateString()
+    }
+    let state = JSON.stringify(gameState);
+    localStorage.setItem("state", state);
+    gameState = JSON.parse(localStorage.state)
+}else {
     gameState = JSON.parse(localStorage.state);
     let i = 0;
     while (i < gameState.boardState.length && gameState.boardState[i] != ""){
@@ -110,7 +133,11 @@ function fill(value) {
     word[index] = value;
     currentRow.children[index].querySelector(".letter").innerHTML = value;
     currentRow.children[index].querySelector(".letter").classList.add("filledBorder");
-    index++;
+    currentRow.children[index].querySelector(".letter").classList.add("pop");
+    index++
+    setTimeout(()=>{
+        currentRow.children[index-1].querySelector(".letter").classList.remove("pop");
+    },100);
 }
 
 function remove() {
@@ -139,6 +166,10 @@ function checkWord() {
 
     if (submittedWord.length < 5) {
         modalMsg("Numero di lettere errato");
+        currentRow.classList.add("shake")
+        setTimeout(()=>{
+            currentRow.classList.remove("shake")
+        }, 500)
         return false;
     }
 
@@ -153,13 +184,19 @@ function checkWord() {
 
     if (!finded) {
         modalMsg("Parola non presente");
+        currentRow.classList.add("shake")
+        setTimeout(()=>{
+            currentRow.classList.remove("shake")
+        }, 500)
         return false;
     }
-
+    let k = 0;
     for (let i = 0; i < submittedWord.length; i++) {
         currentRow.children[i].querySelector(".letter").classList.add("absentLetter");
+        currentRow.children[i].querySelector(".letter").classList.remove("flipOut")
         gameState.wordState[row][i] = "absent";
         localStorage.setItem("state", JSON.stringify(gameState))
+
         let j = 0;
         let finded = false;
         while(!finded && j<key.length){
@@ -236,6 +273,7 @@ function checkWord() {
             }
         }
     }
+    
 
     if (correctLetter === 5) {
         gameState.boardState[row] = submittedWord
@@ -267,7 +305,7 @@ function isLetter(str) {
 
 
 document.addEventListener("keydown", function (e) {
-
+    
     let letter = e.key;
 
     if (letter === "Enter" && !end) {
@@ -313,8 +351,11 @@ for (let i = 0; i < key.length; i++) {
             remove();
         }
 
-        if (index < 5 && i != 27 && i != 19 && !end) {
+        if (index <= 5 && i != 27 && i != 19 && !end) {
             fill(letter);
+            setTimeout(()=>{
+                index++;
+            },100)
         }
     })
 }
