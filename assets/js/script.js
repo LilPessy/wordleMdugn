@@ -342,6 +342,8 @@ for (let i = 0; i < key.length; i++) {
                 if (row < 5) {
                     index = 0;
                     row++;
+                    gameState.rowIndex = row;
+                    localStorage.setItem("state", JSON.stringify(gameState))
                     currentRow = document.querySelectorAll(".row")[row];
                 }
             }
