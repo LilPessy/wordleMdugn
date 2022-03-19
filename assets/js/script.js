@@ -353,9 +353,6 @@ for (let i = 0; i < key.length; i++) {
 
         if (index <= 5 && i != 27 && i != 19 && !end) {
             fill(letter);
-            setTimeout(()=>{
-                index++;
-            },100)
         }
     })
 }
